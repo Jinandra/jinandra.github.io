@@ -1,37 +1,42 @@
-## Welcome to GitHub Pages
+# Jinandra Kumar — Portfolio
 
-You can use the [editor on GitHub](https://github.com/Jinandra/jinandra.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+Welcome to the source code repository for my personal portfolio website: [jinandra.github.io](https://jinandra.github.io)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This site showcases my professional background, selected projects, skills, and ways to connect with me.
 
-### Markdown
+## 🔹 About Me
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+I'm a Full Stack Web Developer with over 10 years of experience building robust and scalable applications. I specialize in:
 
-```markdown
-Syntax highlighted code block
+- Laravel, PHP, MySQL
+- Vue.js, React, JavaScript (ES6+)
+- REST APIs, Stripe, Shopify Integrations
+- AWS, Redis, Docker
+- Clean Code, Secure Architecture & Performance Optimization
 
-# Header 1
-## Header 2
-### Header 3
+## 🔹 Live Site
 
-- Bulleted
-- List
+🌐 Visit my portfolio: [jinandra.github.io](https://jinandra.github.io)
 
-1. Numbered
-2. List
+## 🔹 Technologies Used
 
-**Bold** and _Italic_ and `Code` text
+- **Frontend:** HTML5, CSS3, Tailwind CSS, JavaScript, Vue.js, React
+- **Backend:** Laravel, PHP, Node.js, MySQL, PostgreSQL
+- **Deployment:** GitHub Pages (static hosting)
 
-[Link](url) and ![Image](src)
-```
+## 🔹 Sections in Portfolio
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+- ✦ Projects (live links + descriptions)
+- ✦ Tech Skills (Frontend & Backend)
+- ✦ Testimonials (optional)
+- ✦ Contact Information
 
-### Jekyll Themes
+## 🔹 Development
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Jinandra/jinandra.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+This site is built with plain HTML/CSS and some JS enhancements. If you'd like to run it locally:
 
-### Support or Contact
+```bash
+# Clone the repo
+git clone https://github.com/Jinandra/jinandra.github.io.git
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+# Open index.html directly in your browser

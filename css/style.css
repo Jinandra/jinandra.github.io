@@ -677,7 +677,7 @@ p {
     background: var(--primary-text);
     color: white;
     text-align: center;
-    padding: 40px 0;
+    padding: 5px 0;
 }
 
 .footer p {
