@@ -4,6 +4,76 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     const navbar = document.getElementById('navbar');
+
+    const skills = [
+        {
+            title: 'Backend',
+            icon: 'backend',
+            items: ['Laravel', 'Python', 'FastAPI', 'Django', 'PHP', 'Symfony', 'Node.js', 'REST APIs', 'GraphQL']
+        },
+        {
+            title: 'AI · Daily Driver',
+            icon: 'ai',
+            items: ['OpenAI / GPT', 'Claude', 'Gemini', 'Cursor', 'Copilot', 'n8n', 'AI Automation']
+        },
+        {
+            title: 'Frontend',
+            icon: 'frontend',
+            items: ['React', 'Next.js', 'Vue', 'TypeScript', 'Tailwind CSS', 'JavaScript']
+        },
+        {
+            title: 'Cloud · DevOps',
+            icon: 'devops',
+            items: ['Docker', 'Kubernetes', 'AWS', 'Linux', 'Nginx', 'Git', 'CI/CD', 'Jenkins']
+        },
+        {
+            title: 'Data · APIs',
+            icon: 'data',
+            items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Stripe', 'OAuth', 'JWT']
+        },
+        {
+            title: 'Architecture',
+            icon: 'architecture',
+            items: ['SaaS Architecture', 'Microservices', 'Queue Systems', 'Event-driven Systems', 'API Integrations', 'Webhooks', 'Payment Systems']
+        }
+    ];
+
+    const skillIconMap = {
+        backend: 'icon-backend',
+        ai: 'icon-ai',
+        frontend: 'icon-frontend',
+        devops: 'icon-devops',
+        data: 'icon-data',
+        architecture: 'icon-architecture'
+    };
+
+    const skillsGrid = document.getElementById('skills-grid');
+
+    function renderSkillsDashboard() {
+        if (!skillsGrid) return;
+
+        skillsGrid.innerHTML = skills.map(card => {
+            const iconId = skillIconMap[card.icon] || 'icon-frontend';
+            const count = `${String(card.items.length).padStart(2, '0')} tools`;
+
+            return `
+                <article class="skill-card">
+                    <div class="skill-card-header">
+                        <h4 class="skill-card-title">${card.title}</h4>
+                        <span class="skill-card-count">${count}</span>
+                    </div>
+                    <div class="skill-tags">
+                        ${card.items.map(item => `
+                            <span class="skill-tag">
+                                <svg class="skill-tag-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#${iconId}"></use></svg>
+                                <span>${item}</span>
+                            </span>
+                        `).join('')}
+                    </div>
+                </article>
+            `;
+        }).join('');
+    }
     
     // Mobile menu toggle
     if (navToggle) {
@@ -296,6 +366,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Initialize typing animation
+    renderSkillsDashboard();
     typeWriter();
     
     // Parallax effect for hero section
