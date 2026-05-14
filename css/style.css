@@ -195,7 +195,7 @@ p {
     gap: 80px;
     align-items: center;
     max-width: 1200px;
-    margin: 70px 0 auto;
+    margin: 70px  auto 0 auto;
     padding: 0 24px;
 }
 
