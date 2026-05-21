@@ -49,6 +49,130 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const skillsGrid = document.getElementById('skills-grid');
 
+    function initializeTestimonialSourceLinks() {
+        const linkedinUrl = 'https://www.linkedin.com/in/jinandra-kumar-49306122/';
+        const upworkUrl = 'https://www.upwork.com/freelancers/~010458698f5bccfee1';
+        const testimonialAuthors = document.querySelectorAll('.testimonial-author');
+
+        testimonialAuthors.forEach(authorBlock => {
+            if (authorBlock.querySelector('.testimonial-source-links')) return;
+
+            const sourceLinks = document.createElement('div');
+            sourceLinks.className = 'testimonial-source-links';
+
+            sourceLinks.innerHTML = `
+                <a href="${linkedinUrl}" target="_blank" rel="noopener" class="testimonial-source-link social-link" aria-label="View LinkedIn recommendations">
+                    <i class="fab fa-linkedin"></i>
+                    
+                </a>
+                <a href="${upworkUrl}" target="_blank" rel="noopener" class="testimonial-source-link social-link" aria-label="View Upwork reviews">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="width: 18px;"><path d="M493.9 359.6C443.6 359.6 410.4 320.7 401.1 305.7C413 210.4 447.9 180.3 493.9 180.3C539.4 180.3 574.8 216.7 574.8 270C574.8 323.3 539.4 359.7 493.9 359.7L493.9 359.6zM493.9 121.8C412 121.8 366.1 175.2 352.9 230.2C338 202.2 327 164.7 318.4 129.9L205.2 129.9L205.2 270.9C205.2 322 181.9 359.9 136.4 359.9C90.9 359.9 64.8 322.1 64.8 270.9L65.3 129.9L0 129.9L0 270.9C0 312 13.3 349.3 37.6 376C62.6 403.5 96.8 417.8 136.4 417.8C215.2 417.8 270.2 357.4 270.2 270.9L270.2 176.1C278.4 207.3 298 267.2 335.5 319.7L300.5 519.1L366.9 519.1L390 377.8C397.6 384.1 405.7 389.8 414.2 394.8C436.4 408.8 461.9 416.7 488.1 417.6C488.1 417.6 492.1 417.8 494.2 417.8C575.4 417.8 640.1 354.9 640.1 270C640.1 185.1 575.3 121.9 494.1 121.9L493.9 121.8z"/></svg>
+                    
+                </a>
+            `;
+
+            authorBlock.appendChild(sourceLinks);
+        });
+    }
+
+    function initializeTestimonialToggles() {
+        const maxChars = 360;
+        const testimonialParagraphs = document.querySelectorAll('.testimonial-content p');
+
+        testimonialParagraphs.forEach(paragraph => {
+            if (paragraph.dataset.testimonialProcessed === 'true') return;
+
+            const fullText = paragraph.textContent.replace(/\s+/g, ' ').trim();
+
+            if (fullText.length <= maxChars) return;
+
+            const truncatedText = `${fullText.slice(0, maxChars).trim()}...`;
+            paragraph.textContent = truncatedText;
+            paragraph.dataset.testimonialProcessed = 'true';
+
+            const toggleButton = document.createElement('button');
+            toggleButton.type = 'button';
+            toggleButton.className = 'testimonial-toggle';
+            toggleButton.textContent = 'See more';
+            toggleButton.setAttribute('aria-expanded', 'false');
+
+            toggleButton.addEventListener('click', function () {
+                const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+
+                if (isExpanded) {
+                    paragraph.textContent = truncatedText;
+                    toggleButton.textContent = 'See more';
+                    toggleButton.setAttribute('aria-expanded', 'false');
+                } else {
+                    paragraph.textContent = fullText;
+                    toggleButton.textContent = 'See less';
+                    toggleButton.setAttribute('aria-expanded', 'true');
+                }
+            });
+
+            paragraph.insertAdjacentElement('afterend', toggleButton);
+        });
+    }
+
+    function initializeTestimonialsMobileCarousel() {
+        const grid = document.querySelector('.testimonials-grid');
+        if (!grid || grid.dataset.carouselReady === 'true') return;
+
+        const cards = grid.querySelectorAll('.testimonial-item');
+        if (cards.length < 2) return;
+
+        const controls = document.createElement('div');
+        controls.className = 'testimonials-carousel-controls';
+        controls.innerHTML = `
+            <button type="button" class="testimonials-carousel-btn" data-direction="prev" aria-label="Show previous testimonial">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="testimonials-carousel-btn" data-direction="next" aria-label="Show next testimonial">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </button>
+        `;
+
+        grid.insertAdjacentElement('afterend', controls);
+        grid.dataset.carouselReady = 'true';
+
+        const prevButton = controls.querySelector('[data-direction="prev"]');
+        const nextButton = controls.querySelector('[data-direction="next"]');
+        const mobileBreakpoint = window.matchMedia('(max-width: 768px)');
+
+        const getScrollStep = () => {
+            const firstCard = grid.querySelector('.testimonial-item');
+            if (!firstCard) return grid.clientWidth;
+
+            return firstCard.getBoundingClientRect().width + 16;
+        };
+
+        const updateButtonState = () => {
+            if (!mobileBreakpoint.matches) {
+                prevButton.disabled = true;
+                nextButton.disabled = true;
+                return;
+            }
+
+            const maxScrollLeft = Math.max(grid.scrollWidth - grid.clientWidth, 0);
+            prevButton.disabled = grid.scrollLeft <= 4;
+            nextButton.disabled = grid.scrollLeft >= maxScrollLeft - 4;
+        };
+
+        prevButton.addEventListener('click', () => {
+            if (!mobileBreakpoint.matches) return;
+            grid.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (!mobileBreakpoint.matches) return;
+            grid.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+        });
+
+        grid.addEventListener('scroll', updateButtonState, { passive: true });
+        window.addEventListener('resize', updateButtonState);
+        updateButtonState();
+    }
+
     function renderSkillsDashboard() {
         if (!skillsGrid) return;
 
@@ -367,6 +491,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize typing animation
     renderSkillsDashboard();
+    initializeTestimonialSourceLinks();
+    initializeTestimonialToggles();
+    initializeTestimonialsMobileCarousel();
     typeWriter();
     
     // Parallax effect for hero section
