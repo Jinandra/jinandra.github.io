@@ -40,7 +40,7 @@
     <title>Jinandra Gupta | AI-Augmented Backend Engineer | Laravel, Python & SaaS Expert</title>
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -122,7 +122,12 @@
             </div>
             <div class="hero-image">
                 <div class="hero-image-card">
-                    <img src="website_images/51df8d23thumbnail.jpeg" alt="Professional Laravel developer workspace" class="workspace-img">
+                    <a href="https://www.youtube.com/watch?v=vxniXHWfQ9w" target="_blank" rel="noopener" class="hero-video-trigger" id="hero-video-trigger" aria-label="Play introduction video">
+                        <img src="website_images/image-293.webp" alt="Watch Jinandra's introduction video" class="workspace-img">
+                        <span class="hero-video-play" aria-hidden="true">
+                            <i class="fas fa-play"></i>
+                        </span>
+                    </a>
                     <div class="availability-badge">
                         <div class="status-dot"></div>
                         <span>Available for new projects</span>
@@ -131,6 +136,29 @@
             </div>
         </div>
     </section>
+
+    <div class="video-modal" id="hero-video-modal" aria-hidden="true" role="dialog" aria-label="Introduction video" aria-modal="true">
+        <div class="video-modal-content">
+            <button type="button" class="video-modal-close" id="hero-video-close" aria-label="Close video">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="video-frame-wrap">
+                <iframe
+                    id="hero-video-iframe"
+                    title="Jinandra introduction video"
+                    src=""
+                    data-src="https://www.youtube.com/embed/vxniXHWfQ9w?si=K3_jzwkmIKQ6A4bb"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <a href="https://www.youtube.com/watch?v=vxniXHWfQ9w" target="_blank" rel="noopener" class="video-modal-fallback-link">
+                Open on YouTube
+            </a>
+        </div>
+    </div>
 
     <!-- About Section -->
     <section id="about" class="about">

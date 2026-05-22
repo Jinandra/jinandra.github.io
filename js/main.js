@@ -173,6 +173,81 @@ document.addEventListener('DOMContentLoaded', function() {
         updateButtonState();
     }
 
+    function initializeSectionReveals() {
+        const sections = document.querySelectorAll('section[id]');
+        const revealableSections = Array.from(sections).filter(section => section.id !== 'home');
+
+        sections.forEach(section => {
+            if (section.id === 'home') {
+                section.classList.add('is-visible');
+            }
+        });
+
+        if (!revealableSections.length) return;
+
+        if (!('IntersectionObserver' in window)) {
+            revealableSections.forEach(section => section.classList.add('is-visible'));
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries, observerInstance) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-visible');
+                observerInstance.unobserve(entry.target);
+            });
+        }, {
+            threshold: 0.18,
+            rootMargin: '0px 0px -10% 0px'
+        });
+
+        revealableSections.forEach(section => observer.observe(section));
+    }
+
+    function initializeHeroVideoModal() {
+        const trigger = document.getElementById('hero-video-trigger');
+        const modal = document.getElementById('hero-video-modal');
+        const closeButton = document.getElementById('hero-video-close');
+        const iframe = document.getElementById('hero-video-iframe');
+
+        if (!trigger || !modal || !closeButton || !iframe) return;
+
+        const closeModal = () => {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            iframe.src = '';
+        };
+
+        const openModal = () => {
+            const videoUrl = iframe.dataset.src || '';
+            if (videoUrl && iframe.getAttribute('src') !== videoUrl) {
+                iframe.setAttribute('src', videoUrl);
+            }
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        };
+
+        trigger.addEventListener('click', (event) => {
+            event.preventDefault();
+            openModal();
+        });
+        closeButton.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
+
     function renderSkillsDashboard() {
         if (!skillsGrid) return;
 
@@ -423,6 +498,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Animate elements on scroll
     function animateOnScroll() {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+            document.querySelectorAll('.skill-category, .portfolio-item, .service-item').forEach(element => {
+                element.style.opacity = '1';
+                element.style.transform = 'none';
+                element.classList.add('animated');
+            });
+            return;
+        }
+
         const animatedElements = document.querySelectorAll('.skill-category, .portfolio-item, .service-item');
         
         animatedElements.forEach(element => {
@@ -494,6 +578,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeTestimonialSourceLinks();
     initializeTestimonialToggles();
     initializeTestimonialsMobileCarousel();
+    initializeHeroVideoModal();
+    initializeSectionReveals();
     typeWriter();
     
     // Parallax effect for hero section
@@ -633,7 +719,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const sections = document.querySelectorAll('section');
     sections.forEach(section => {
-        section.style.opacity = '0';
+        // section.style.opacity = '0';
         section.style.transform = 'translateY(50px)';
         section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
         sectionObserver.observe(section);
