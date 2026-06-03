@@ -1051,6 +1051,48 @@ section#home {
     font-weight: bold;
 }
 
+.service-item:nth-child(1) {
+    --service-accent: #2f6de5;
+    --service-accent-soft: rgba(47, 109, 229, 0.08);
+    --service-border: rgba(47, 109, 229, 0.24);
+    --service-border-soft: rgba(47, 109, 229, 0.16);
+}
+
+.service-item:nth-child(2) {
+    --service-accent: #3367d6;
+    --service-accent-soft: rgba(51, 103, 214, 0.08);
+    --service-border: rgba(51, 103, 214, 0.24);
+    --service-border-soft: rgba(51, 103, 214, 0.16);
+}
+
+.service-item:nth-child(3) {
+    --service-accent: #235fbf;
+    --service-accent-soft: rgba(35, 95, 191, 0.08);
+    --service-border: rgba(35, 95, 191, 0.24);
+    --service-border-soft: rgba(35, 95, 191, 0.16);
+}
+
+.service-item:nth-child(4) {
+    --service-accent: #2e57a7;
+    --service-accent-soft: rgba(46, 87, 167, 0.08);
+    --service-border: rgba(46, 87, 167, 0.24);
+    --service-border-soft: rgba(46, 87, 167, 0.16);
+}
+
+.service-item:nth-child(5) {
+    --service-accent: #3a5f9b;
+    --service-accent-soft: rgba(58, 95, 155, 0.08);
+    --service-border: rgba(58, 95, 155, 0.24);
+    --service-border-soft: rgba(58, 95, 155, 0.16);
+}
+
+.service-item:nth-child(6) {
+    --service-accent: #285ea8;
+    --service-accent-soft: rgba(40, 94, 168, 0.08);
+    --service-border: rgba(40, 94, 168, 0.24);
+    --service-border-soft: rgba(40, 94, 168, 0.16);
+}
+
 /* Testimonials Section */
 .testimonials {
     background: linear-gradient(180deg, rgba(247, 250, 255, 0.88) 0%, rgba(240, 245, 255, 1) 100%);
